@@ -196,11 +196,37 @@ The tuned Random Forest achieved the highest ROC-AUC, while Logistic Regression 
 
 ---
 
-## Neural Network
+## Neural Network Experiment
 
-A feed-forward Artificial Neural Network was also developed using TensorFlow/Keras to compare traditional machine learning with a neural-network approach.
+I also tested a feed-forward Artificial Neural Network to see whether a neural-network approach would improve churn prediction.
 
-This provided an additional benchmark and demonstrated how the same customer churn problem can be approached using deep learning.
+The ANN used the same train/test split as the traditional machine learning models. Categorical features were one-hot encoded and numerical features were standardized before training.
+
+The network included:
+
+- 32-neuron hidden layer with ReLU activation
+- 20% dropout
+- 16-neuron hidden layer with ReLU activation
+- Sigmoid output layer
+- Adam optimizer
+- Binary cross-entropy loss
+- Early stopping based on validation loss
+
+### ANN Results
+
+On the held-out test set:
+
+| Model | Test Accuracy | ROC-AUC |
+| --- | ---: | ---: |
+| Logistic Regression | 80.55% | 0.8420 |
+| Tuned Random Forest | **80.55%** | **0.8441** |
+| ANN | 78.92% | 0.8402 |
+
+The ANN produced a ROC-AUC of **0.8402**, which was competitive with the traditional models but did not outperform the tuned Random Forest.
+
+For customers who actually churned, the ANN correctly identified 182 of 374 customers at the default 0.50 classification threshold.
+
+Based on the test results, I kept the tuned Random Forest as the final prediction model. The ANN experiment was useful because it showed that adding model complexity did not improve performance on this structured tabular dataset.
 
 ---
 
@@ -326,7 +352,8 @@ Customer_Intelligence_Platform/
 │   ├── raw/
 │   │   └── WA_Fn-UseC_-Telco-Customer-Churn.csv
 │   └── processed/
-│       └── customer_intelligence_output.csv
+│       ├── customer_intelligence_output.csv
+│       └── model_comparison.csv
 │
 ├── models/
 │   ├── customer_churn_model.pkl
@@ -349,6 +376,5 @@ Customer_Intelligence_Platform/
 ├── tableau/
 │   └── Customer_Intelligence_Platform.twbx
 │
-├── .gitignore
 ├── README.md
 └── requirements.txt
