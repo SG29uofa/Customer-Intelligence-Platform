@@ -1,0 +1,4 @@
+Model,Accuracy,ROC-AUC
+Logistic Regression,0.8055,0.842
+Tuned Random Forest,0.8055,0.8441
+ANN,0.7892122072391767,0.8402206205275259
