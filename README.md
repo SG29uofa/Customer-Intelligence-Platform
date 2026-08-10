@@ -228,6 +228,10 @@ For customers who actually churned, the ANN correctly identified 182 of 374 cust
 
 Based on the test results, I kept the tuned Random Forest as the final prediction model. The ANN experiment was useful because it showed that adding model complexity did not improve performance on this structured tabular dataset.
 
+### ML vs ANN Model Comparison
+
+![ML vs ANN Model Comparison](screenshots/model_comparison.png)
+
 ---
 
 ## Customer Risk Segmentation
