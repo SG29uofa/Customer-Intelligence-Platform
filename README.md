@@ -4,6 +4,11 @@ An end-to-end customer churn analytics platform combining **statistical analysis
 
 The project analyzes **7,043 telecom customers**, identifies key churn patterns, compares multiple predictive models, generates customer-level churn probabilities, segments customers by risk, visualizes insights through Tableau, and provides AI-generated customer insights using a locally hosted Llama 3.2 model through Ollama.
 
+### Live Dashboard
+
+View the interactive Tableau dashboard:
+
+[Customer Intelligence Dashboard](https://public.tableau.com/app/profile/shreyash.ghagare/viz/Customer_Intelligence_Platform/CustomerIntelligenceDashboard?publish=yes)
 ---
 
 ## Project Overview
