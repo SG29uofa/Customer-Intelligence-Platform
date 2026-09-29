@@ -317,6 +317,75 @@ The dashboard enables business users to explore churn risk and customer patterns
 The packaged Tableau workbook is available in the `tableau/` directory.
 
 ---
+---
+
+## AWS SageMaker Extension
+
+The customer churn workflow was extended to AWS to demonstrate a cloud-based machine-learning workflow using Amazon S3 and Amazon SageMaker Studio.
+
+The AWS implementation uses the same IBM Telco Customer Churn dataset and reproduces a Logistic Regression classification workflow in the SageMaker environment.
+
+### AWS Architecture
+
+Amazon S3  
+↓  
+SageMaker Studio / JupyterLab  
+↓  
+Load Customer Dataset from S3  
+↓  
+Data Cleaning & Preprocessing  
+↓  
+Stratified Train/Test Split  
+↓  
+Scikit-learn Pipeline  
+↓  
+Logistic Regression Training  
+↓  
+Model Evaluation  
+↓  
+Serialized Model Artifact  
+↓  
+Amazon S3
+
+### AWS Workflow
+
+The SageMaker notebook:
+
+1. Connects to Amazon S3 using Boto3.
+2. Loads the 7,043-customer churn dataset directly from S3.
+3. Cleans and preprocesses the customer data.
+4. Creates a stratified training and test split.
+5. Builds a Scikit-learn preprocessing and Logistic Regression pipeline.
+6. Trains the model inside SageMaker Studio / JupyterLab.
+7. Evaluates the model on the held-out test set.
+8. Serializes the complete trained pipeline using Joblib.
+9. Stores the resulting model artifact in Amazon S3.
+
+### AWS Model Results
+
+The Logistic Regression pipeline achieved the following performance on the held-out test set:
+
+| Metric | Result |
+| --- | ---: |
+| Accuracy | 80.88% |
+| Precision | 66.67% |
+| Recall | 55.97% |
+| F1 Score | 60.85% |
+| ROC-AUC | **0.8448** |
+
+Confusion matrix:
+
+```text
+[[1395, 157],
+ [ 247, 314]]
+
+```
+
+The AWS implementation demonstrates cloud object storage, programmatic S3 data access, model development in SageMaker Studio, model evaluation, and persistence of a trained machine-learning artifact back to S3.
+
+The complete AWS notebook and implementation notes are available in the [`aws/`](aws/) directory.
+
+---
 
 ## Technologies Used
 
@@ -350,12 +419,26 @@ The packaged Tableau workbook is available in the `tableau/` directory.
 - Joblib
 - Git / GitHub
 
+### Cloud & MLOps
+
+- Amazon Web Services (AWS)
+- Amazon S3
+- Amazon SageMaker Studio
+- SageMaker JupyterLab
+- Boto3
+- Cloud-based ML model development
+- Model artifact storage in S3
+
 ---
 
 ## Project Structure
 
 ```text
 Customer_Intelligence_Platform/
+│
+├── aws/
+│   ├── 01_customer_churn_sagemaker.ipynb
+│   └── README.md
 │
 ├── data/
 │   ├── raw/
